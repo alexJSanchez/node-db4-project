@@ -2,7 +2,7 @@
 exports.up = async function(knex) {
   await knex.schema
   .createTable('recipes', table => {
-    table.increments()
+    table.increments('recipe_id')
     table.string('recipe_name', 200).notNullable().unique()
   })
   .createTable('ingredients', table => {
@@ -11,7 +11,7 @@ exports.up = async function(knex) {
     table.string('ingredient_unit', 50)
   })
   .createTable('steps', table => {
-    table.increments()
+    table.increments('step_id')
     table.string('step_text', 200).notNullable()
     table.integer('step_number').notNullable()
     table.integer('recipe_id')
@@ -23,7 +23,7 @@ exports.up = async function(knex) {
     .onUpdate('RESTRICT')
   })
   .createTable('step_ingredients', table => {
-    table.increments('step_ingredien')
+    table.increments('step_ingredient_id')
     table.float('quantity').notNullable()
     table.integer('step_id')
     .unsigned()
